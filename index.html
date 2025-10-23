@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Level Card Sort Games</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+    color: white;
+  }
+  
+  h1 {
+    font-size: 48px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    margin-bottom: 15px;
+  }
+  
+  .subtitle {
+    font-size: 20px;
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+  
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+  
+  .subject-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .subject-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--card-color-1), var(--card-color-2));
+  }
+  
+  .subject-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+  
+  .subject-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+  }
+  
+  .subject-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .subject-description {
+    font-size: 14px;
+    color: #7f8c8d;
+    line-height: 1.5;
+  }
+  
+  /* Individual subject colors */
+  .math { --card-color-1: #1abc9c; --card-color-2: #16a085; }
+  .science { --card-color-1: #3498db; --card-color-2: #2980b9; }
+  .social-studies { --card-color-1: #9b59b6; --card-color-2: #8e44ad; }
+  .language-arts { --card-color-1: #e67e22; --card-color-2: #d35400; }
+  .shop { --card-color-1: #e74c3c; --card-color-2: #c0392b; }
+  .theatre { --card-color-1: #16a085; --card-color-2: #138d75; }
+  .art { --card-color-1: #2ecc71; --card-color-2: #27ae60; }
+  .pe { --card-color-1: #34495e; --card-color-2: #2c3e50; }
+  .choir { --card-color-1: #ff7f50; --card-color-2: #ff6347; }
+  .foreign-lang { --card-color-1: #8e44ad; --card-color-2: #71368a; }
+  .band { --card-color-1: #16a085; --card-color-2: #138d75; }
+  .foods { --card-color-1: #d35400; --card-color-2: #ba4a00; }
+  .business { --card-color-1: #2980b9; --card-color-2: #21618c; }
+  
+  footer {
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    opacity: 0.9;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 36px;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+    }
+    
+    .subjects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🎓 Learning Level Card Sort Games</h1>
+    <p class="subtitle">Select a subject to practice categorizing learning objectives by Bloom's Taxonomy</p>
+  </header>
+  
+  <div class="subjects-grid">
+    <a href="math_learning.html" class="subject-card math">
+      <div class="subject-icon">📐</div>
+      <div class="subject-title">Math</div>
+      <div class="subject-description">Practice sorting mathematical concepts and problem-solving tasks</div>
+    </a>
+    
+    <a href="science_learning.html" class="subject-card science">
+      <div class="subject-icon">🔬</div>
+      <div class="subject-title">Science</div>
+      <div class="subject-description">Classify scientific methods and experimental design tasks</div>
+    </a>
+    
+    <a href="socialstud_learning.html" class="subject-card social-studies">
+      <div class="subject-icon">🌍</div>
+      <div class="subject-title">Social Studies</div>
+      <div class="subject-description">Sort historical events and civic engagement activities</div>
+    </a>
+    
+    <a href="language_arts_card_sort.html" class="subject-card language-arts">
+      <div class="subject-icon">📚</div>
+      <div class="subject-title">Language Arts</div>
+      <div class="subject-description">Categorize reading comprehension and writing tasks</div>
+    </a>
+    
+    <a href="shop_cte_card_sort.html" class="subject-card shop">
+      <div class="subject-icon">🔨</div>
+      <div class="subject-title">Shop (CTE)</div>
+      <div class="subject-description">Sort woodworking and construction project tasks</div>
+    </a>
+    
+    <a href="band_orch.html" class="subject-card band">
+      <div class="subject-icon">🎵</div>
+      <div class="subject-title">Band / Orchestra</div>
+      <div class="subject-description">Classify musical performance and theory concepts</div>
+    </a>
+    
+    <a href="art_learning.html" class="subject-card art">
+      <div class="subject-icon">🎨</div>
+      <div class="subject-title">Art</div>
+      <div class="subject-description">Sort artistic techniques and creative design tasks</div>
+    </a>
+    
+    <a href="physical_education.html" class="subject-card pe">
+      <div class="subject-icon">⚽</div>
+      <div class="subject-title">Physical Education</div>
+      <div class="subject-description">Categorize fitness concepts and sports strategies</div>
+    </a>
+    
+    <a href="choir.html" class="subject-card choir">
+      <div class="subject-icon">🎵</div>
+      <div class="subject-title">Choir</div>
+      <div class="subject-description">Sort vocal techniques and musical performance tasks</div>
+    </a>
+    
+    <a href="foreign_lang.html" class="subject-card foreign-lang">
+      <div class="subject-icon">🌐</div>
+      <div class="subject-title">Foreign Language</div>
+      <div class="subject-description">Classify language learning and communication tasks</div>
+    </a>
+    
+    <a href="food_fabrics.html" class="subject-card foods">
+      <div class="subject-icon">🍳</div>
+      <div class="subject-title">Foods & Fabrics</div>
+      <div class="subject-description">Sort culinary arts and sewing project tasks</div>
+    </a>
+    
+    <a href="business_mark.html" class="subject-card business">
+      <div class="subject-icon">💼</div>
+      <div class="subject-title">Business & Marketing</div>
+      <div class="subject-description">Categorize entrepreneurship and marketing concepts</div>
+    </a>
+  </div>
+  
+  <footer>
+    <p>Drag cards to the correct learning level: Knowledge & Comprehension, Application & Analysis, or Synthesis & Evaluation</p>
+  </footer>
+</div>
+
+</body>
+</html>
