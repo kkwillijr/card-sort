@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Studies Learning Level Card Sort Game</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); 
+    margin:0; 
+    padding:20px; 
+    min-height: 100vh;
+  }
+  h1 { 
+    text-align: center; 
+    color: #fff; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+    font-size: 36px;
+  }
+  .instructions {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 18px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .levels-container { 
+    display: flex; 
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  .level-column {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+  .level-column h2 {
+    color: #9b59b6;
+    margin-top: 0;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 3px solid #9b59b6;
+    padding-bottom: 10px;
+  }
+  .drop-zone { 
+    border: 3px dashed #9b59b6; 
+    border-radius: 8px; 
+    min-height: 200px; 
+    padding: 15px; 
+    background: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  .drop-zone.drag-over {
+    background: #f3e5f5;
+    border-color: #4CAF50;
+    border-style: solid;
+    transform: scale(1.02);
+  }
+  .cards-area {
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+  }
+  .cards-area h2 {
+    color: #333;
+    margin-top: 0;
+    font-size: 22px;
+    border-bottom: 3px solid #9b59b6;
+    padding-bottom: 10px;
+  }
+  #cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+    min-height: 100px;
+  }
+  .card { 
+    background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);
+    padding: 15px; 
+    border-radius: 8px; 
+    cursor: grab; 
+    font-size: 15px; 
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+    color: #fff;
+    font-weight: 500;
+    max-width: 300px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+  .card.dragging { 
+    opacity: 0.5; 
+    cursor: grabbing;
+  }
+  .controls {
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .feedback { 
+    font-weight: bold; 
+    font-size: 22px; 
+    min-width: 150px;
+    text-align: center;
+  }
+  .scoreboard, .timer { 
+    font-size: 22px; 
+    font-weight: bold;
+    color: #333;
+  }
+  .buttons { 
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  button { 
+    padding: 12px 24px; 
+    font-size: 16px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    background: #9b59b6; 
+    color: #fff; 
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  button:hover {
+    background: #8e44ad;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+  button:active {
+    transform: translateY(0);
+  }
+  .empty-message {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+  }
+  @media (max-width: 768px) {
+    .levels-container {
+      flex-direction: column;
+    }
+    h1 {
+      font-size: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>🌍 Social Studies Learning Level Card Sort</h1>
+<div class="instructions">Drag each social studies task card to the correct learning level. Match all cards to win!</div>
+
+<div class="game-container">
+  <div class="cards-area">
+    <h2>Social Studies Task Cards to Sort:</h2>
+    <div id="cards-container"></div>
+  </div>
+
+  <div class="levels-container">
+    <div class="level-column">
+      <h2>Knowledge & Comprehension</h2>
+      <div class="drop-zone" data-level="Knowledge & Comprehension"></div>
+    </div>
+    
+    <div class="level-column">
+      <h2>Application & Analysis</h2>
+      <div class="drop-zone" data-level="Application & Analysis"></div>
+    </div>
+    
+    <div class="level-column">
+      <h2>Synthesis & Evaluation</h2>
+      <div class="drop-zone" data-level="Synthesis & Evaluation"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="scoreboard">Score: <span id="score">0</span> / <span id="total">0</span></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="timer">Time: <span id="time">300</span>s</div>
+    <div class="buttons">
+      <button id="resetBtn">Reset Game</button>
+      <button id="startTimerBtn">Start Timer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const cardsData = [
+  {text:"List the branches of government",level:"Knowledge & Comprehension"},
+  {text:"Summarize causes of the American Revolution",level:"Knowledge & Comprehension"},
+  {text:"Identify major world religions and their beliefs",level:"Knowledge & Comprehension"},
+  {text:"Name the continents and oceans",level:"Knowledge & Comprehension"},
+  {text:"Recall key events of the Civil War",level:"Knowledge & Comprehension"},
+  {text:"Define democracy, monarchy, and dictatorship",level:"Knowledge & Comprehension"},
+  
+  {text:"Compare the Articles of Confederation and the U.S. Constitution",level:"Application & Analysis"},
+  {text:"Interpret a historical map",level:"Application & Analysis"},
+  {text:"Analyze causes and effects of the Industrial Revolution",level:"Application & Analysis"},
+  {text:"Examine how geography affects culture",level:"Application & Analysis"},
+  {text:"Compare different economic systems",level:"Application & Analysis"},
+  {text:"Use primary sources to understand historical events",level:"Application & Analysis"},
+  
+  {text:"Develop a plan applying ancient democratic principles",level:"Synthesis & Evaluation"},
+  {text:"Defend a leader's historical decisions",level:"Synthesis & Evaluation"},
+  {text:"Create a constitution for a new country",level:"Synthesis & Evaluation"},
+  {text:"Evaluate the impact of a historical event on modern society",level:"Synthesis & Evaluation"},
+  {text:"Propose solutions to a current global issue",level:"Synthesis & Evaluation"},
+  {text:"Judge the fairness of a historical policy or law",level:"Synthesis & Evaluation"}
+];
+
+function shuffle(array){ 
+  const newArray = [...array];
+  for(let i = newArray.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
+const cardsContainer = document.getElementById("cards-container");
+function createCards(){
+  cardsContainer.innerHTML = "";
+  document.getElementById("total").textContent = cardsData.length;
+  
+  shuffle(cardsData).forEach(item=>{
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.textContent = item.text;
+    card.dataset.level = item.level;
+    card.setAttribute("draggable","true");
+    cardsContainer.appendChild(card);
+
+    card.addEventListener("dragstart",(e)=>{
+      card.classList.add("dragging");
+      e.dataTransfer.effectAllowed = "move";
+    });
+    
+    card.addEventListener("dragend",()=>{
+      card.classList.remove("dragging");
+    });
+  });
+  
+  updateEmptyMessages();
+}
+
+function updateEmptyMessages(){
+  const zones = document.querySelectorAll(".drop-zone");
+  zones.forEach(zone => {
+    const cards = zone.querySelectorAll(".card");
+    const existingMsg = zone.querySelector(".empty-message");
+    
+    if(cards.length === 0 && !existingMsg){
+      const msg = document.createElement("div");
+      msg.classList.add("empty-message");
+      msg.textContent = "Drop cards here";
+      zone.appendChild(msg);
+    } else if(cards.length > 0 && existingMsg){
+      existingMsg.remove();
+    }
+  });
+}
+
+createCards();
+
+const dropzones = document.querySelectorAll(".drop-zone");
+let score = 0;
+const feedback = document.getElementById("feedback");
+const scoreDisplay = document.getElementById("score");
+
+dropzones.forEach(zone=>{
+  zone.addEventListener("dragover",(e)=>{
+    e.preventDefault();
+    zone.classList.add("drag-over");
+  });
+  
+  zone.addEventListener("dragleave",()=>{
+    zone.classList.remove("drag-over");
+  });
+  
+  zone.addEventListener("drop",(e)=>{
+    e.preventDefault();
+    zone.classList.remove("drag-over");
+    
+    const card = document.querySelector(".dragging");
+    if(!card) return;
+    
+    const wasInDropZone = card.parentElement.classList.contains("drop-zone");
+    
+    if(card.dataset.level === zone.dataset.level){
+      zone.appendChild(card);
+      feedback.textContent = "✓ Correct!";
+      feedback.style.color = "#4CAF50";
+      
+      if(!wasInDropZone){
+        score += 1;
+        scoreDisplay.textContent = score;
+      }
+      
+      updateEmptyMessages();
+      
+      if(score === cardsData.length){
+        clearInterval(timerInterval);
+        feedback.textContent = "🎉 Perfect! All cards sorted!";
+        feedback.style.color = "#4CAF50";
+      }
+    } else {
+      feedback.textContent = "✗ Try again!";
+      feedback.style.color = "#f44336";
+      setTimeout(()=>{
+        feedback.textContent = "";
+      }, 2000);
+    }
+  });
+});
+
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  const allCards = document.querySelectorAll(".card");
+  allCards.forEach(card => {
+    cardsContainer.appendChild(card);
+  });
+  
+  const cardsArray = Array.from(cardsContainer.children);
+  shuffle(cardsArray).forEach(card => cardsContainer.appendChild(card));
+  
+  score = 0;
+  scoreDisplay.textContent = score;
+  feedback.textContent = "";
+  clearInterval(timerInterval);
+  timeLeft = 300;
+  document.getElementById("time").textContent = timeLeft;
+  document.getElementById("time").style.color = "#333";
+  timerStarted = false;
+  document.getElementById("startTimerBtn").textContent = "Start Timer";
+  
+  updateEmptyMessages();
+});
+
+let timeLeft = 300;
+let timerInterval;
+let timerStarted = false;
+
+document.getElementById("startTimerBtn").addEventListener("click",()=>{
+  if(timerStarted){
+    clearInterval(timerInterval);
+    timerStarted = false;
+    document.getElementById("startTimerBtn").textContent = "Start Timer";
+  } else {
+    timerStarted = true;
+    document.getElementById("startTimerBtn").textContent = "Pause Timer";
+    timerInterval = setInterval(()=>{
+      if(timeLeft > 0){
+        timeLeft--;
+        document.getElementById("time").textContent = timeLeft;
+        
+        if(timeLeft <= 30 && timeLeft > 0){
+          document.getElementById("time").style.color = "#f44336";
+        }
+      } else {
+        clearInterval(timerInterval);
+        feedback.textContent = "⏰ Time's up!";
+        feedback.style.color = "#f44336";
+        timerStarted = false;
+        document.getElementById("startTimerBtn").textContent = "Start Timer";
+      }
+    }, 1000);
+  }
+});
+</script>
+
+</body>
+</html>
