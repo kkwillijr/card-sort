@@ -181,7 +181,7 @@
     font-weight: 500;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%);
     line-height: 1.4;
     max-width: 90vw;
   }
@@ -443,10 +443,14 @@ function handleTouchStart(e) {
   // Make original card semi-transparent
   touchedCard.classList.add("dragging");
   
+  // Get the actual width of the touched card
+  const cardRect = touchedCard.getBoundingClientRect();
+  
   // Create floating clone
   cardClone = document.createElement('div');
   cardClone.className = 'card-clone';
   cardClone.textContent = touchedCard.textContent;
+  cardClone.style.width = cardRect.width + 'px';
   cardClone.style.left = touch.clientX + 'px';
   cardClone.style.top = touch.clientY + 'px';
   document.body.appendChild(cardClone);
@@ -461,6 +465,20 @@ function handleTouchMove(e) {
   // Move the clone with finger
   cardClone.style.left = touch.clientX + 'px';
   cardClone.style.top = touch.clientY + 'px';
+  
+  // Auto-scroll when near edges
+  const scrollThreshold = 80; // pixels from edge to trigger scroll
+  const scrollSpeed = 8; // pixels per frame
+  const viewportHeight = window.innerHeight;
+  const touchY = touch.clientY;
+  
+  if(touchY < scrollThreshold) {
+    // Near top of screen - scroll up
+    window.scrollBy(0, -scrollSpeed);
+  } else if(touchY > viewportHeight - scrollThreshold) {
+    // Near bottom of screen - scroll down
+    window.scrollBy(0, scrollSpeed);
+  }
   
   // Visual feedback for drop zones
   document.querySelectorAll('.drop-zone').forEach(zone => {
