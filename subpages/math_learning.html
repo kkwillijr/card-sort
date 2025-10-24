@@ -157,18 +157,33 @@
     touch-action: none;
     user-select: none;
     line-height: 1.4;
+    position: relative;
   }
   
   .card:active {
     cursor: grabbing;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    z-index: 100;
   }
   
   .card.dragging { 
-    opacity: 0.5; 
-    cursor: grabbing;
+    opacity: 0.3;
+  }
+  
+  /* Floating card that follows finger */
+  .card-clone {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: clamp(13px, 3.5vw, 15px);
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transform: translate(-50%, -50%) scale(1.1);
+    line-height: 1.4;
+    max-width: 90vw;
   }
   
   .controls {
@@ -378,6 +393,9 @@ function shuffle(array){
 
 // Touch support variables
 let touchedCard = null;
+let cardClone = null;
+let touchStartX = 0;
+let touchStartY = 0;
 
 // --- Create Cards ---
 const cardsContainer = document.getElementById("cards-container");
@@ -416,23 +434,40 @@ function createCards(){
 function handleTouchStart(e) {
   e.preventDefault();
   touchedCard = e.target.closest('.card');
-  if(touchedCard) {
-    touchedCard.classList.add("dragging");
-  }
+  if(!touchedCard) return;
+  
+  const touch = e.touches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+  
+  // Make original card semi-transparent
+  touchedCard.classList.add("dragging");
+  
+  // Create floating clone
+  cardClone = document.createElement('div');
+  cardClone.className = 'card-clone';
+  cardClone.textContent = touchedCard.textContent;
+  cardClone.style.left = touch.clientX + 'px';
+  cardClone.style.top = touch.clientY + 'px';
+  document.body.appendChild(cardClone);
 }
 
 function handleTouchMove(e) {
   e.preventDefault();
-  if(!touchedCard) return;
+  if(!touchedCard || !cardClone) return;
   
   const touch = e.touches[0];
-  const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
   
-  // Visual feedback
+  // Move the clone with finger
+  cardClone.style.left = touch.clientX + 'px';
+  cardClone.style.top = touch.clientY + 'px';
+  
+  // Visual feedback for drop zones
   document.querySelectorAll('.drop-zone').forEach(zone => {
     zone.classList.remove('drag-over');
   });
   
+  const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
   const dropZone = elementBelow?.closest('.drop-zone');
   if(dropZone) {
     dropZone.classList.add('drag-over');
@@ -447,10 +482,18 @@ function handleTouchEnd(e) {
   const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
   const dropZone = elementBelow?.closest('.drop-zone');
   
+  // Remove clone
+  if(cardClone) {
+    cardClone.remove();
+    cardClone = null;
+  }
+  
+  // Remove visual feedback
   document.querySelectorAll('.drop-zone').forEach(zone => {
     zone.classList.remove('drag-over');
   });
   
+  // Process drop
   if(dropZone) {
     handleDrop(touchedCard, dropZone);
   }
