@@ -7,203 +7,296 @@
 <a href="../index.html" class="back-button">← Back to Menu</a>
 
 <style>
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
   .back-button {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 10px;
     background: rgba(255, 255, 255, 0.95);
     color: #333;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: clamp(14px, 3.5vw, 16px);
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     z-index: 1000;
     display: inline-flex;
     align-items: center;
     gap: 5px;
-  }
-
-  .back-button:hover {
-    background: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    touch-action: manipulation;
   }
 
   .back-button:active {
-    transform: translateY(0);
+    transform: scale(0.95);
+    background: white;
   }
-</style>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-    margin:0;
-    padding:20px;
+
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); 
+    margin: 0; 
+    padding: 10px;
+    padding-top: 60px;
     min-height: 100vh;
+    overflow-x: hidden;
   }
-  h1 {
-    text-align: center;
-    color: #fff;
+  
+  h1 { 
+    text-align: center; 
+    color: #fff; 
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     margin-bottom: 10px;
-    font-size: 36px;
+    font-size: clamp(24px, 6vw, 36px);
+    padding: 0 10px;
+    line-height: 1.2;
   }
+  
   .instructions {
     text-align: center;
     color: #fff;
-    margin-bottom: 30px;
-    font-size: 18px;
+    margin-bottom: 20px;
+    font-size: clamp(14px, 3.5vw, 18px);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 15px;
+    line-height: 1.5;
   }
+  
   .game-container {
     max-width: 1000px;
     margin: 0 auto;
   }
-  .levels-container {
-    display: flex;
+  
+  .levels-container { 
+    display: flex; 
     justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: 15px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
+  
   .level-column {
     flex: 1;
-    min-width: 280px;
+    min-width: min(100%, 260px);
     background: rgba(255,255,255,0.95);
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   }
+  
   .level-column h2 {
-    color: #1abc9c;
+    color: #e67e22;
     margin-top: 0;
     text-align: center;
-    font-size: 18px;
-    border-bottom: 3px solid #1abc9c;
-    padding-bottom: 10px;
+    font-size: clamp(16px, 4vw, 18px);
+    border-bottom: 3px solid #e67e22;
+    padding-bottom: 8px;
+    line-height: 1.3;
   }
-  .drop-zone {
-    border: 3px dashed #1abc9c;
-    border-radius: 8px;
-    min-height: 200px;
-    padding: 15px;
+  
+  .drop-zone { 
+    border: 3px dashed #e67e22; 
+    border-radius: 8px; 
+    min-height: 150px; 
+    padding: 12px; 
     background: #f9f9f9;
     transition: all 0.3s ease;
+    touch-action: none;
   }
+  
   .drop-zone.drag-over {
     background: #e8f5e9;
     border-color: #4CAF50;
     border-style: solid;
     transform: scale(1.02);
   }
+  
   .cards-area {
     background: rgba(255,255,255,0.95);
     border-radius: 12px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     margin-bottom: 20px;
   }
+  
   .cards-area h2 {
     color: #333;
     margin-top: 0;
-    font-size: 22px;
-    border-bottom: 3px solid #1abc9c;
-    padding-bottom: 10px;
+    font-size: clamp(18px, 4.5vw, 22px);
+    border-bottom: 3px solid #e67e22;
+    padding-bottom: 8px;
   }
+  
   #cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: flex-start;
-    min-height: 100px;
+    min-height: 80px;
   }
-  .card {
+  
+  .card { 
     background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-    padding: 15px;
-    border-radius: 8px;
-    cursor: grab;
-    font-size: 15px;
+    padding: 12px; 
+    border-radius: 8px; 
+    cursor: grab; 
+    font-size: clamp(13px, 3.5vw, 15px); 
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     transition: all 0.2s ease;
     color: #fff;
     font-weight: 500;
-    max-width: 300px;
+    max-width: 100%;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    touch-action: none;
+    user-select: none;
+    line-height: 1.4;
   }
-  .card:hover {
-    transform: translateY(-3px);
+  
+  .card:active {
+    cursor: grabbing;
+    transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    z-index: 100;
   }
-  .card.dragging {
-    opacity: 0.5;
+  
+  .card.dragging { 
+    opacity: 0.5; 
     cursor: grabbing;
   }
+  
   .controls {
     background: rgba(255,255,255,0.95);
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
     max-width: 1000px;
     margin: 0 auto;
   }
-  .feedback {
-    font-weight: bold;
-    font-size: 22px;
-    min-width: 150px;
+  
+  .feedback { 
+    font-weight: bold; 
+    font-size: clamp(18px, 4.5vw, 22px); 
+    min-width: 120px;
     text-align: center;
+    flex-basis: 100%;
   }
-  .scoreboard, .timer {
-    font-size: 22px;
+  
+  .scoreboard, .timer { 
+    font-size: clamp(18px, 4.5vw, 22px); 
     font-weight: bold;
     color: #333;
   }
-  .buttons {
+  
+  .buttons { 
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
-  button {
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #1abc9c;
-    color: #fff;
+  
+  button { 
+    padding: 12px 20px; 
+    font-size: clamp(14px, 3.5vw, 16px); 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    background: #e67e22; 
+    color: #fff; 
     font-weight: bold;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    touch-action: manipulation;
+    min-width: 120px;
   }
-  button:hover {
-    background: #16a085;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  }
+  
   button:active {
-    transform: translateY(0);
+    transform: scale(0.95);
+    background: #e67e22;
+    opacity: 0.8;
   }
+  
   .empty-message {
     text-align: center;
     color: #999;
     font-style: italic;
-    padding: 20px;
+    padding: 15px;
+    font-size: clamp(12px, 3vw, 14px);
   }
+  
+  @media (hover: hover) and (pointer: fine) {
+    .back-button:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+  }
+  
   @media (max-width: 768px) {
+    body {
+      padding: 8px;
+      padding-top: 55px;
+    }
+    
     .levels-container {
       flex-direction: column;
+      gap: 12px;
     }
-    h1 {
-      font-size: 28px;
+    
+    .level-column {
+      min-width: 100%;
+    }
+    
+    .drop-zone {
+      min-height: 120px;
+    }
+    
+    .controls {
+      padding: 12px;
+      gap: 12px;
+    }
+    
+    .scoreboard, .timer {
+      flex-basis: 45%;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 380px) {
+    .card {
+      padding: 10px;
+    }
+    
+    .level-column {
+      padding: 12px;
+    }
+    
+    .drop-zone {
+      padding: 10px;
+      min-height: 100px;
     }
   }
 </style>
@@ -211,11 +304,11 @@
 <body>
 
 <h1>📚 Language Arts Learning Level Card Sort</h1>
-<div class="instructions">Drag each math task card to the correct learning level. Match all cards to win!</div>
+<div class="instructions">Drag each task card to the correct learning level. Match all cards to win!</div>
 
 <div class="game-container">
   <div class="cards-area">
-    <h2>Math Task Cards to Sort:</h2>
+    <h2>Language Arts Task Cards to Sort:</h2>
     <div id="cards-container"></div>
   </div>
 
@@ -224,12 +317,12 @@
       <h2>Knowledge & Comprehension</h2>
       <div class="drop-zone" data-level="Knowledge & Comprehension"></div>
     </div>
-
+    
     <div class="level-column">
       <h2>Application & Analysis</h2>
       <div class="drop-zone" data-level="Application & Analysis"></div>
     </div>
-
+    
     <div class="level-column">
       <h2>Synthesis & Evaluation</h2>
       <div class="drop-zone" data-level="Synthesis & Evaluation"></div>
@@ -238,8 +331,8 @@
 
   <div class="controls">
     <div class="scoreboard">Score: <span id="score">0</span> / <span id="total">0</span></div>
-    <div class="feedback" id="feedback"></div>
     <div class="timer">Time: <span id="time">300</span>s</div>
+    <div class="feedback" id="feedback"></div>
     <div class="buttons">
       <button id="resetBtn">Reset Game</button>
       <button id="startTimerBtn">Start Timer</button>
@@ -248,32 +341,9 @@
 </div>
 
 <script>
-// --- Math Cards Data ---
-const cardsData = [
-  {text:"Define literary terms (metaphor, simile, alliteration)",level:"Knowledge & Comprehension"},
-  {text:"Summarize a story's main events",level:"Knowledge & Comprehension"},
-  {text:"Identify parts of speech in a sentence",level:"Knowledge & Comprehension"},
-  {text:"Recall the elements of plot structure",level:"Knowledge & Comprehension"},
-  {text:"List different types of poetry",level:"Knowledge & Comprehension"},
-  {text:"Name common literary devices",level:"Knowledge & Comprehension"},
+const cardsData = [{"text": "Define literary terms (metaphor, simile, alliteration)", "level": "Knowledge & Comprehension"}, {"text": "Summarize a story's main events", "level": "Knowledge & Comprehension"}, {"text": "Identify parts of speech in a sentence", "level": "Knowledge & Comprehension"}, {"text": "Recall the elements of plot structure", "level": "Knowledge & Comprehension"}, {"text": "List different types of poetry", "level": "Knowledge & Comprehension"}, {"text": "Name common literary devices", "level": "Knowledge & Comprehension"}, {"text": "Explain how tone affects mood", "level": "Application & Analysis"}, {"text": "Compare two characters' motivations", "level": "Application & Analysis"}, {"text": "Analyze how setting influences the story", "level": "Application & Analysis"}, {"text": "Identify the author's purpose and perspective", "level": "Application & Analysis"}, {"text": "Examine the use of symbolism in a text", "level": "Application & Analysis"}, {"text": "Interpret the theme of a literary work", "level": "Application & Analysis"}, {"text": "Write an alternate ending maintaining theme", "level": "Synthesis & Evaluation"}, {"text": "Evaluate an author's argument and evidence", "level": "Synthesis & Evaluation"}, {"text": "Create an original short story with literary devices", "level": "Synthesis & Evaluation"}, {"text": "Critique a character's decisions and suggest alternatives", "level": "Synthesis & Evaluation"}, {"text": "Compose a persuasive essay with supporting evidence", "level": "Synthesis & Evaluation"}, {"text": "Judge the effectiveness of different narrative techniques", "level": "Synthesis & Evaluation"}];
 
-  {text:"Explain how tone affects mood",level:"Application & Analysis"},
-  {text:"Compare two characters' motivations",level:"Application & Analysis"},
-  {text:"Analyze how setting influences the story",level:"Application & Analysis"},
-  {text:"Identify the author's purpose and perspective",level:"Application & Analysis"},
-  {text:"Examine the use of symbolism in a text",level:"Application & Analysis"},
-  {text:"Interpret the theme of a literary work",level:"Application & Analysis"},
-
-  {text:"Write an alternate ending maintaining theme",level:"Synthesis & Evaluation"},
-  {text:"Evaluate an author's argument and evidence",level:"Synthesis & Evaluation"},
-  {text:"Create an original short story with literary devices",level:"Synthesis & Evaluation"},
-  {text:"Critique a character's decisions and suggest alternatives",level:"Synthesis & Evaluation"},
-  {text:"Compose a persuasive essay with supporting evidence",level:"Synthesis & Evaluation"},
-  {text:"Judge the effectiveness of different narrative techniques",level:"Synthesis & Evaluation"}
-];
-
-// --- Shuffle Function ---
-function shuffle(array){
+function shuffle(array){ 
   const newArray = [...array];
   for(let i = newArray.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -282,12 +352,13 @@ function shuffle(array){
   return newArray;
 }
 
-// --- Create Cards ---
+let touchedCard = null;
+
 const cardsContainer = document.getElementById("cards-container");
 function createCards(){
   cardsContainer.innerHTML = "";
   document.getElementById("total").textContent = cardsData.length;
-
+  
   shuffle(cardsData).forEach(item=>{
     const card = document.createElement("div");
     card.classList.add("card");
@@ -300,22 +371,70 @@ function createCards(){
       card.classList.add("dragging");
       e.dataTransfer.effectAllowed = "move";
     });
-
+    
     card.addEventListener("dragend",()=>{
       card.classList.remove("dragging");
     });
-  });
 
+    card.addEventListener("touchstart", handleTouchStart, {passive: false});
+    card.addEventListener("touchmove", handleTouchMove, {passive: false});
+    card.addEventListener("touchend", handleTouchEnd, {passive: false});
+  });
+  
   updateEmptyMessages();
 }
 
-// --- Update empty messages ---
+function handleTouchStart(e) {
+  e.preventDefault();
+  touchedCard = e.target.closest('.card');
+  if(touchedCard) {
+    touchedCard.classList.add("dragging");
+  }
+}
+
+function handleTouchMove(e) {
+  e.preventDefault();
+  if(!touchedCard) return;
+  
+  const touch = e.touches[0];
+  const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+  
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.classList.remove('drag-over');
+  });
+  
+  const dropZone = elementBelow?.closest('.drop-zone');
+  if(dropZone) {
+    dropZone.classList.add('drag-over');
+  }
+}
+
+function handleTouchEnd(e) {
+  e.preventDefault();
+  if(!touchedCard) return;
+  
+  const touch = e.changedTouches[0];
+  const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+  const dropZone = elementBelow?.closest('.drop-zone');
+  
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.classList.remove('drag-over');
+  });
+  
+  if(dropZone) {
+    handleDrop(touchedCard, dropZone);
+  }
+  
+  touchedCard.classList.remove("dragging");
+  touchedCard = null;
+}
+
 function updateEmptyMessages(){
   const zones = document.querySelectorAll(".drop-zone");
   zones.forEach(zone => {
     const cards = zone.querySelectorAll(".card");
     const existingMsg = zone.querySelector(".empty-message");
-
+    
     if(cards.length === 0 && !existingMsg){
       const msg = document.createElement("div");
       msg.classList.add("empty-message");
@@ -329,71 +448,70 @@ function updateEmptyMessages(){
 
 createCards();
 
-// --- Drag & Drop ---
 const dropzones = document.querySelectorAll(".drop-zone");
 let score = 0;
 const feedback = document.getElementById("feedback");
 const scoreDisplay = document.getElementById("score");
+
+function handleDrop(card, zone) {
+  const wasInDropZone = card.parentElement.classList.contains("drop-zone");
+  
+  if(card.dataset.level === zone.dataset.level){
+    zone.appendChild(card);
+    feedback.textContent = "✓ Correct!";
+    feedback.style.color = "#4CAF50";
+    
+    if(!wasInDropZone){
+      score += 1;
+      scoreDisplay.textContent = score;
+    }
+    
+    updateEmptyMessages();
+    
+    if(score === cardsData.length){
+      clearInterval(timerInterval);
+      feedback.textContent = "🎉 Perfect! All cards sorted!";
+      feedback.style.color = "#4CAF50";
+    }
+  } else {
+    feedback.textContent = "✗ Try again!";
+    feedback.style.color = "#f44336";
+    setTimeout(()=>{
+      feedback.textContent = "";
+    }, 2000);
+  }
+}
 
 dropzones.forEach(zone=>{
   zone.addEventListener("dragover",(e)=>{
     e.preventDefault();
     zone.classList.add("drag-over");
   });
-
+  
   zone.addEventListener("dragleave",()=>{
     zone.classList.remove("drag-over");
   });
-
+  
   zone.addEventListener("drop",(e)=>{
     e.preventDefault();
     zone.classList.remove("drag-over");
-
+    
     const card = document.querySelector(".dragging");
     if(!card) return;
-
-    const wasInDropZone = card.parentElement.classList.contains("drop-zone");
-
-    if(card.dataset.level === zone.dataset.level){
-      zone.appendChild(card);
-      feedback.textContent = "✓ Correct!";
-      feedback.style.color = "#4CAF50";
-
-      if(!wasInDropZone){
-        score += 1;
-        scoreDisplay.textContent = score;
-      }
-
-      updateEmptyMessages();
-
-      // Check if game complete
-      if(score === cardsData.length){
-        clearInterval(timerInterval);
-        feedback.textContent = "🎉 Perfect! All cards sorted!";
-        feedback.style.color = "#4CAF50";
-      }
-    } else {
-      feedback.textContent = "✗ Try again!";
-      feedback.style.color = "#f44336";
-      setTimeout(()=>{
-        feedback.textContent = "";
-      }, 2000);
-    }
+    
+    handleDrop(card, zone);
   });
 });
 
-// --- Reset Game ---
 document.getElementById("resetBtn").addEventListener("click",()=>{
-  // Move all cards back to container
   const allCards = document.querySelectorAll(".card");
   allCards.forEach(card => {
     cardsContainer.appendChild(card);
   });
-
-  // Shuffle cards
+  
   const cardsArray = Array.from(cardsContainer.children);
   shuffle(cardsArray).forEach(card => cardsContainer.appendChild(card));
-
+  
   score = 0;
   scoreDisplay.textContent = score;
   feedback.textContent = "";
@@ -403,11 +521,10 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
   document.getElementById("time").style.color = "#333";
   timerStarted = false;
   document.getElementById("startTimerBtn").textContent = "Start Timer";
-
+  
   updateEmptyMessages();
 });
 
-// --- Timer ---
 let timeLeft = 300;
 let timerInterval;
 let timerStarted = false;
@@ -424,7 +541,7 @@ document.getElementById("startTimerBtn").addEventListener("click",()=>{
       if(timeLeft > 0){
         timeLeft--;
         document.getElementById("time").textContent = timeLeft;
-
+        
         if(timeLeft <= 30 && timeLeft > 0){
           document.getElementById("time").style.color = "#f44336";
         }
