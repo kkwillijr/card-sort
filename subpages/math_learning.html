@@ -11,7 +11,7 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
   }
-  
+
   .back-button {
     position: fixed;
     top: 10px;
@@ -37,26 +37,26 @@
     background: white;
   }
 
-  body { 
+  body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); 
-    margin: 0; 
+    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+    margin: 0;
     padding: 10px;
     padding-top: 60px;
     min-height: 100vh;
     overflow-x: hidden;
   }
-  
-  h1 { 
-    text-align: center; 
-    color: #fff; 
+
+  h1 {
+    text-align: center;
+    color: #fff;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     margin-bottom: 10px;
     font-size: clamp(24px, 6vw, 36px);
     padding: 0 10px;
     line-height: 1.2;
   }
-  
+
   .instructions {
     text-align: center;
     color: #fff;
@@ -68,20 +68,20 @@
     padding: 0 15px;
     line-height: 1.5;
   }
-  
+
   .game-container {
     max-width: 1000px;
     margin: 0 auto;
   }
-  
-  .levels-container { 
-    display: flex; 
+
+  .levels-container {
+    display: flex;
     justify-content: space-between;
     gap: 15px;
     margin-bottom: 20px;
     flex-wrap: wrap;
   }
-  
+
   .level-column {
     flex: 1;
     min-width: min(100%, 260px);
@@ -90,7 +90,7 @@
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   }
-  
+
   .level-column h2 {
     color: #1abc9c;
     margin-top: 0;
@@ -100,24 +100,24 @@
     padding-bottom: 8px;
     line-height: 1.3;
   }
-  
-  .drop-zone { 
-    border: 3px dashed #1abc9c; 
-    border-radius: 8px; 
-    min-height: 150px; 
-    padding: 12px; 
+
+  .drop-zone {
+    border: 3px dashed #1abc9c;
+    border-radius: 8px;
+    min-height: 150px;
+    padding: 12px;
     background: #f9f9f9;
     transition: all 0.3s ease;
     touch-action: none;
   }
-  
+
   .drop-zone.drag-over {
     background: #e8f5e9;
     border-color: #4CAF50;
     border-style: solid;
     transform: scale(1.02);
   }
-  
+
   .cards-area {
     background: rgba(255,255,255,0.95);
     border-radius: 12px;
@@ -125,7 +125,7 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     margin-bottom: 20px;
   }
-  
+
   .cards-area h2 {
     color: #333;
     margin-top: 0;
@@ -133,7 +133,7 @@
     border-bottom: 3px solid #1abc9c;
     padding-bottom: 8px;
   }
-  
+
   #cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -141,13 +141,13 @@
     justify-content: flex-start;
     min-height: 80px;
   }
-  
-  .card { 
+
+  .card {
     background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-    padding: 12px; 
-    border-radius: 8px; 
-    cursor: grab; 
-    font-size: clamp(13px, 3.5vw, 15px); 
+    padding: 12px;
+    border-radius: 8px;
+    cursor: grab;
+    font-size: clamp(13px, 3.5vw, 15px);
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     transition: all 0.2s ease;
     color: #fff;
@@ -159,15 +159,15 @@
     line-height: 1.4;
     position: relative;
   }
-  
+
   .card:active {
     cursor: grabbing;
   }
-  
-  .card.dragging { 
+
+  .card.dragging {
     opacity: 0.3;
   }
-  
+
   /* Floating card that follows finger */
   .card-clone {
     position: fixed;
@@ -185,7 +185,7 @@
     line-height: 1.4;
     max-width: 90vw;
   }
-  
+
   .controls {
     background: rgba(255,255,255,0.95);
     border-radius: 12px;
@@ -199,49 +199,49 @@
     max-width: 1000px;
     margin: 0 auto;
   }
-  
-  .feedback { 
-    font-weight: bold; 
-    font-size: clamp(18px, 4.5vw, 22px); 
+
+  .feedback {
+    font-weight: bold;
+    font-size: clamp(18px, 4.5vw, 22px);
     min-width: 120px;
     text-align: center;
     flex-basis: 100%;
   }
-  
-  .scoreboard, .timer { 
-    font-size: clamp(18px, 4.5vw, 22px); 
+
+  .scoreboard, .timer {
+    font-size: clamp(18px, 4.5vw, 22px);
     font-weight: bold;
     color: #333;
   }
-  
-  .buttons { 
+
+  .buttons {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
   }
-  
-  button { 
-    padding: 12px 20px; 
-    font-size: clamp(14px, 3.5vw, 16px); 
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    background: #1abc9c; 
-    color: #fff; 
+
+  button {
+    padding: 12px 20px;
+    font-size: clamp(14px, 3.5vw, 16px);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #1abc9c;
+    color: #fff;
     font-weight: bold;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     touch-action: manipulation;
     min-width: 120px;
   }
-  
+
   button:active {
     transform: scale(0.95);
     background: #16a085;
   }
-  
+
   .empty-message {
     text-align: center;
     color: #999;
@@ -249,7 +249,7 @@
     padding: 15px;
     font-size: clamp(12px, 3vw, 14px);
   }
-  
+
   /* Desktop hover effects */
   @media (hover: hover) and (pointer: fine) {
     .back-button:hover {
@@ -269,47 +269,47 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
   }
-  
+
   /* Mobile specific */
   @media (max-width: 768px) {
     body {
       padding: 8px;
       padding-top: 55px;
     }
-    
+
     .levels-container {
       flex-direction: column;
       gap: 12px;
     }
-    
+
     .level-column {
       min-width: 100%;
     }
-    
+
     .drop-zone {
       min-height: 120px;
     }
-    
+
     .controls {
       padding: 12px;
       gap: 12px;
     }
-    
+
     .scoreboard, .timer {
       flex-basis: 45%;
       text-align: center;
     }
   }
-  
+
   @media (max-width: 380px) {
     .card {
       padding: 10px;
     }
-    
+
     .level-column {
       padding: 12px;
     }
-    
+
     .drop-zone {
       padding: 10px;
       min-height: 100px;
@@ -333,12 +333,12 @@
       <h2>Knowledge & Comprehension</h2>
       <div class="drop-zone" data-level="Knowledge & Comprehension"></div>
     </div>
-    
+
     <div class="level-column">
       <h2>Application & Analysis</h2>
       <div class="drop-zone" data-level="Application & Analysis"></div>
     </div>
-    
+
     <div class="level-column">
       <h2>Synthesis & Evaluation</h2>
       <div class="drop-zone" data-level="Synthesis & Evaluation"></div>
@@ -365,14 +365,14 @@ const cardsData = [
   {text:"List the properties of geometric shapes",level:"Knowledge & Comprehension"},
   {text:"Recall the order of operations (PEMDAS)",level:"Knowledge & Comprehension"},
   {text:"Name the parts of an equation",level:"Knowledge & Comprehension"},
-  
+
   {text:"Solve multi-step word problems involving percentages",level:"Application & Analysis"},
   {text:"Analyze a graph for data trends",level:"Application & Analysis"},
   {text:"Apply the Pythagorean theorem to find missing sides",level:"Application & Analysis"},
   {text:"Compare different strategies for solving a problem",level:"Application & Analysis"},
   {text:"Use ratios and proportions in real-world scenarios",level:"Application & Analysis"},
   {text:"Interpret data from tables and charts",level:"Application & Analysis"},
-  
+
   {text:"Design a real-world problem using surface area and volume",level:"Synthesis & Evaluation"},
   {text:"Evaluate which method for solving equations is most efficient",level:"Synthesis & Evaluation"},
   {text:"Create your own word problem with multiple solutions",level:"Synthesis & Evaluation"},
@@ -382,7 +382,7 @@ const cardsData = [
 ];
 
 // --- Shuffle Function ---
-function shuffle(array){ 
+function shuffle(array){
   const newArray = [...array];
   for(let i = newArray.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -402,7 +402,7 @@ const cardsContainer = document.getElementById("cards-container");
 function createCards(){
   cardsContainer.innerHTML = "";
   document.getElementById("total").textContent = cardsData.length;
-  
+
   shuffle(cardsData).forEach(item=>{
     const card = document.createElement("div");
     card.classList.add("card");
@@ -416,7 +416,7 @@ function createCards(){
       card.classList.add("dragging");
       e.dataTransfer.effectAllowed = "move";
     });
-    
+
     card.addEventListener("dragend",()=>{
       card.classList.remove("dragging");
     });
@@ -426,7 +426,7 @@ function createCards(){
     card.addEventListener("touchmove", handleTouchMove, {passive: false});
     card.addEventListener("touchend", handleTouchEnd, {passive: false});
   });
-  
+
   updateEmptyMessages();
 }
 
@@ -435,17 +435,17 @@ function handleTouchStart(e) {
   e.preventDefault();
   touchedCard = e.target.closest('.card');
   if(!touchedCard) return;
-  
+
   const touch = e.touches[0];
   touchStartX = touch.clientX;
   touchStartY = touch.clientY;
-  
+
   // Make original card semi-transparent
   touchedCard.classList.add("dragging");
-  
+
   // Get the actual width of the touched card
   const cardRect = touchedCard.getBoundingClientRect();
-  
+
   // Create floating clone
   cardClone = document.createElement('div');
   cardClone.className = 'card-clone';
@@ -459,19 +459,19 @@ function handleTouchStart(e) {
 function handleTouchMove(e) {
   e.preventDefault();
   if(!touchedCard || !cardClone) return;
-  
+
   const touch = e.touches[0];
-  
+
   // Move the clone with finger
   cardClone.style.left = touch.clientX + 'px';
   cardClone.style.top = touch.clientY + 'px';
-  
+
   // Auto-scroll when near edges
-  const scrollThreshold = 80; // pixels from edge to trigger scroll
-  const scrollSpeed = 8; // pixels per frame
+  const scrollThreshold = 120; // pixels from edge to trigger scroll
+  const scrollSpeed = 16; // pixels per frame
   const viewportHeight = window.innerHeight;
   const touchY = touch.clientY;
-  
+
   if(touchY < scrollThreshold) {
     // Near top of screen - scroll up
     window.scrollBy(0, -scrollSpeed);
@@ -479,12 +479,12 @@ function handleTouchMove(e) {
     // Near bottom of screen - scroll down
     window.scrollBy(0, scrollSpeed);
   }
-  
+
   // Visual feedback for drop zones
   document.querySelectorAll('.drop-zone').forEach(zone => {
     zone.classList.remove('drag-over');
   });
-  
+
   const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
   const dropZone = elementBelow?.closest('.drop-zone');
   if(dropZone) {
@@ -495,27 +495,27 @@ function handleTouchMove(e) {
 function handleTouchEnd(e) {
   e.preventDefault();
   if(!touchedCard) return;
-  
+
   const touch = e.changedTouches[0];
   const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
   const dropZone = elementBelow?.closest('.drop-zone');
-  
+
   // Remove clone
   if(cardClone) {
     cardClone.remove();
     cardClone = null;
   }
-  
+
   // Remove visual feedback
   document.querySelectorAll('.drop-zone').forEach(zone => {
     zone.classList.remove('drag-over');
   });
-  
+
   // Process drop
   if(dropZone) {
     handleDrop(touchedCard, dropZone);
   }
-  
+
   touchedCard.classList.remove("dragging");
   touchedCard = null;
 }
@@ -526,7 +526,7 @@ function updateEmptyMessages(){
   zones.forEach(zone => {
     const cards = zone.querySelectorAll(".card");
     const existingMsg = zone.querySelector(".empty-message");
-    
+
     if(cards.length === 0 && !existingMsg){
       const msg = document.createElement("div");
       msg.classList.add("empty-message");
@@ -548,19 +548,19 @@ const scoreDisplay = document.getElementById("score");
 
 function handleDrop(card, zone) {
   const wasInDropZone = card.parentElement.classList.contains("drop-zone");
-  
+
   if(card.dataset.level === zone.dataset.level){
     zone.appendChild(card);
     feedback.textContent = "✓ Correct!";
     feedback.style.color = "#4CAF50";
-    
+
     if(!wasInDropZone){
       score += 1;
       scoreDisplay.textContent = score;
     }
-    
+
     updateEmptyMessages();
-    
+
     // Check if game complete
     if(score === cardsData.length){
       clearInterval(timerInterval);
@@ -581,18 +581,18 @@ dropzones.forEach(zone=>{
     e.preventDefault();
     zone.classList.add("drag-over");
   });
-  
+
   zone.addEventListener("dragleave",()=>{
     zone.classList.remove("drag-over");
   });
-  
+
   zone.addEventListener("drop",(e)=>{
     e.preventDefault();
     zone.classList.remove("drag-over");
-    
+
     const card = document.querySelector(".dragging");
     if(!card) return;
-    
+
     handleDrop(card, zone);
   });
 });
@@ -604,11 +604,11 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
   allCards.forEach(card => {
     cardsContainer.appendChild(card);
   });
-  
+
   // Shuffle cards
   const cardsArray = Array.from(cardsContainer.children);
   shuffle(cardsArray).forEach(card => cardsContainer.appendChild(card));
-  
+
   score = 0;
   scoreDisplay.textContent = score;
   feedback.textContent = "";
@@ -618,7 +618,7 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
   document.getElementById("time").style.color = "#333";
   timerStarted = false;
   document.getElementById("startTimerBtn").textContent = "Start Timer";
-  
+
   updateEmptyMessages();
 });
 
@@ -639,7 +639,7 @@ document.getElementById("startTimerBtn").addEventListener("click",()=>{
       if(timeLeft > 0){
         timeLeft--;
         document.getElementById("time").textContent = timeLeft;
-        
+
         if(timeLeft <= 30 && timeLeft > 0){
           document.getElementById("time").style.color = "#f44336";
         }
